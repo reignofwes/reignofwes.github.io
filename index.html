@@ -168,6 +168,9 @@
 
     <label for="plate" class="data-label">Plate:</label>
     <input type="text" id="plate">
+
+    <label for="fto" class="data-label">FTO Name:</label>
+    <input type="text" id="fto">
     <br>
 
     <!-- Search input -->
@@ -340,7 +343,8 @@
                 const repairCost = parseInt(document.getElementById('repairCost').value) || 0;
                 const total = calculateTotal(selectedItems) + repairCost;
                 const formattedTotal = formatNumberWithCommas(total);
-                const summaryMessage = `<span class="data-label">Customer Name:</span> ${document.getElementById('customerName').value}<br>
+                const summaryMessage = `<span class="data-label">FTO Name:</span> ${document.getElementById('fto').value}<br>
+                                        <span class="data-label">Customer Name:</span> ${document.getElementById('customerName').value}<br>
                                         <span class="data-label">Vehicle | Make/Model:</span> ${document.getElementById('vehicleMakeModel').value}<br>
                                         <span class="data-label">Plate:</span> ${document.getElementById('plate').value}<br>
                                         <span class="data-label">Upgrades Purchased:</span> ${upgradesPurchased}<br>
