@@ -343,13 +343,13 @@
                 const repairCost = parseInt(document.getElementById('repairCost').value) || 0;
                 const total = calculateTotal(selectedItems) + repairCost;
                 const formattedTotal = formatNumberWithCommas(total);
-                const summaryMessage = `<span class="data-label">FTO Name:</span> ${document.getElementById('fto').value}<br>
-                                        <span class="data-label">Customer Name:</span> ${document.getElementById('customerName').value}<br>
+                const summaryMessage = `<span class="data-label">Customer Name:</span> ${document.getElementById('customerName').value}<br>
                                         <span class="data-label">Vehicle | Make/Model:</span> ${document.getElementById('vehicleMakeModel').value}<br>
                                         <span class="data-label">Plate:</span> ${document.getElementById('plate').value}<br>
                                         <span class="data-label">Upgrades Purchased:</span> ${upgradesPurchased}<br>
                                         <span class="data-label">Price Charged:</span> $${formattedTotal}<br>
                                         <span class="data-label">SHOP:</span> Mirror Park Repairs`;
+                                        <span class="data-label">FTO Name:</span> ${document.getElementById('fto').value}<br>
 
                 summaryElement.innerHTML = summaryMessage;
             } else {
