@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Car Upgrades</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1,
+        h2 {
+            color: #000000;
+            /* Change heading color to blue */
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #000000;
+            /* Change text color of buttons to blue */
+            background-color: #ffe8f9;
+            /* Change background color of buttons to yellow */
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-image: linear-gradient(to right, #2575fc 0%, #6a11cb 100%);
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #ffe8f9;
+            /* Change background color of items to blue */
+            color: #000000;
+            /* Change text color of items to yellow */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .item-action {
+            color: #2575fc;
+            user-select: none;
+        }
+
+        #itemList,
+        #selectedItems,
+        #selectedItemsList,
+        #summary {
+            color: #000000;
+            display: inline-block;
+            width: auto;
+        }
+
+        #itemList {
+            max-height: 30vh;
+            /* 30% of the viewport height */
+            column-width: 300px;
+            /* Minimum width of each column, adjust as needed */
+            column-fill: auto;
+            /* Ensures columns are filled evenly */
+            width: 100%;
+            /* Adjust based on the container's width */
+            -webkit-column-width: 300px;
+            /* For Safari and Chrome */
+            -moz-column-width: 300px;
+            /* For Firefox */
+        }
+
+        .item-action,
+        #showSummary,
+        #resetInfo,
+        #resetTotal {
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: bold;
+            color: #000000;
+            /* Change text color of buttons to yellow */
+            background-color: #ffe8f9;
+            /* Change background color of buttons to blue */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            transition: background 0.3s ease;
+        }
+
+        .item-action:hover,
+        #showSummary:hover,
+        #resetInfo:hover,
+        #resetTotal:hover {
+            background-color: #2575fc;
+            /* Change background color of buttons on hover to a lighter shade */
+        }
+
+        /* Additional styles for the selected items */
+        #selectedItemsList,
+        #summary {
+            margin-top: 10px;
+            color: #000000;
+        }
+
+        /* Change color of data to blue */
+        .data-label {
+            color: #000000;
+            font-weight: bold;
+        }
+
+        /* Styling for the logo */
+        /* Styling for the logo container */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            width: 100%;
+            /* Ensure the container spans the full width */
+        }
+
+        .logo-container img {
+            width: 30%;
+            min-width: 100px;
+            /* Set a minimum width for the logo */
+            height: auto;
+            /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Logo container -->
+    <div class="logo-container">
+        <img src="https://discord.cloud/i/ffju04hnw" alt="Mirror Park Repair">
+    </div>
+
+    <label for="customerName" class="data-label">Customer Name:</label>
+    <input type="text" id="customerName">
+
+    <label for="vehicleMakeModel" class="data-label">Vehicle | Make/Model:</label>
+    <input type="text" id="vehicleMakeModel">
+
+    <label for="plate" class="data-label">Plate:</label>
+    <input type="text" id="plate">
+    <br>
+
+    <!-- Search input -->
+    <label for="search" class="data-label">Search:</label>
+    <input type="text" id="search" oninput="filterItems(this.value)">
+    <br>
+
+    <!-- List of car upgrades -->
+    <ul id="itemList">
+        <!-- Updated item information with the same visuals -->
+        <li onclick="selectItem('Arch Cover', 500)">Arch Cover - $500</li>
+        <li onclick="selectItem('Aerial', 500)">Aerial - $500</li>
+        <li onclick="selectItem('Armor', 4250)">Armor 2 - $4250</li>
+        <li onclick="selectItem('Armor', 6500)">Armor 3 - $6500</li>
+        <li onclick="selectItem('Armor', 10450)">Armor 4 - $10450</li>
+        <li onclick="selectItem('Armor', 14250)">Armor 5 - $14250</li>
+        <li onclick="selectItem('Armor', 19500)">Armor 6 - $19500</li>
+        <li onclick="selectItem('Brakes', 4250)">Brakes 2 - $4250</li>
+        <li onclick="selectItem('Brakes', 6500)">Brakes 3 - $6500</li>
+        <li onclick="selectItem('Brakes', 10450)">Brakes 4 - $10450</li>
+        <li onclick="selectItem('Custom Tires', 700)">Custom Tires - $700</li>
+        <li onclick="selectItem('Dashboard Color', 1100)">Dashboard Color - $1100</li>
+        <li onclick="selectItem('Dial', 500)">Dial - $500</li>
+        <li onclick="selectItem('Engine', 4250)">Engine 2 - $4250</li>
+        <li onclick="selectItem('Engine', 6500)">Engine 3 - $6500</li>
+        <li onclick="selectItem('Engine', 10450)">Engine 4 - $10450</li>
+        <li onclick="selectItem('Engine', 14250)">Engine 5 - $14250</li>
+        <li onclick="selectItem('Engine Block', 500)">Engine Block - $500</li>
+        <li onclick="selectItem('Exhaust', 500)">Exhaust - $500</li>
+        <li onclick="selectItem('Front Bumper', 500)">Front Bumper - $500</li>
+        <li onclick="selectItem('Grille', 500)">Grille - $500</li>
+        <li onclick="selectItem('Hood', 500)">Hood - $500</li>
+        <li onclick="selectItem('Interior Respray', 1100)">Interior Respray - $1100</li>
+        <li onclick="selectItem('Left Fender', 500)">Left Fender - $500</li>
+        <li onclick="selectItem('Livery', 500)">Livery - $500</li>
+        <li onclick="selectItem('Ornaments', 500)">Ornaments - $500</li>
+        <li onclick="selectItem('Old Livery', 200)">Old Livery - $200</li>
+        <li onclick="selectItem('P Respray', 1100)">P Respray - $1100</li>
+        <li onclick="selectItem('Pearlescent Respray', 1100)">Pearlescent Respray - $1100</li>
+        <li onclick="selectItem('Plate Index', 1100)">Plate Index - $1100</li>
+        <li onclick="selectItem('Rear Bumper', 500)">Rear Bumper - $500</li>
+        <li onclick="selectItem('Rim Color', 1100)">Rim Color - $1100</li>
+        <li onclick="selectItem('Right Fender', 500)">Right Fender - $500</li>
+        <li onclick="selectItem('Rims', 500)">Rims - $500</li>
+        <li onclick="selectItem('Roof', 500)">Roof - $500</li>
+        <li onclick="selectItem('Roll Cage', 500)">Roll Cage - $500</li>
+        <li onclick="selectItem('Seats', 500)">Seats - $500</li>
+        <li onclick="selectItem('Side Skirt', 500)">Side Skirt - $500</li>
+        <li onclick="selectItem('S Respray', 1100)">S Respray - $1100</li>
+        <li onclick="selectItem('Spoiler', 500)">Spoiler - $500</li>
+        <li onclick="selectItem('Steering Wheel', 500)">Steering Wheel - $500</li>
+        <li onclick="selectItem('Strut', 500)">Strut - $500</li>
+        <li onclick="selectItem('Speaker', 500)">Speaker - $500</li>
+        <li onclick="selectItem('Suspension', 4250)">Suspension 2 - $4250</li>
+        <li onclick="selectItem('Suspension', 6500)">Suspension 3 - $6500</li>
+        <li onclick="selectItem('Suspension', 10450)">Suspension 4 - $10450</li>
+        <li onclick="selectItem('Suspension', 14250)">Suspension 5 - $14250</li>
+        <li onclick="selectItem('Tint', 500)">Tint - $500</li>
+        <li onclick="selectItem('Trunk', 500)">Trunk - $500</li>
+        <li onclick="selectItem('Trim A', 500)">Trim A - $500</li>
+        <li onclick="selectItem('Trim B', 500)">Trim B - $500</li>
+        <li onclick="selectItem('Transmission', 4250)">Transmission 2 - $4250</li>
+        <li onclick="selectItem('Transmission', 6500)">Transmission 3 - $6500</li>
+        <li onclick="selectItem('Transmission', 10450)">Transmission 4 - $10450</li>
+        <li onclick="selectItem('Turbo', 11000)">Turbo - $11000</li>
+        <li onclick="selectItem('Tire Smoke', 500)">Tire Smoke - $500</li>
+    </ul>
+
+    <!-- Total price display -->
+    <h2>Total: $<span id="totalPrice">0</span></h2>
+
+    <!-- Selected items display -->
+    <div id="selectedItems"></div>
+    <div id="selectedItemsList"></div>
+    <br>
+
+    <!-- Repair Cost input -->
+    <div>
+        <label for="repairCost" class="data-label">Repair Cost:</label>
+        <input type="number" id="repairCost" onchange="updateTotal()">
+    </div>
+
+    <!-- Buttons for actions -->
+    <button id="showSummary" onclick="showSummary()">Show Summary</button>
+    <button id="resetInfo" onclick="resetInfo()">Reset Info</button>
+    <button id="resetTotal" onclick="resetTotal()">Reset Total</button>
+
+    <!-- Summary section -->
+    <div id="summary"></div>
+
+    <!-- Script section -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            updateTotal();
+        });
+
+        function selectItem(name, price) {
+            const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || {};
+            if (selectedItems[name]) {
+                selectedItems[name].count++;
+            } else {
+                selectedItems[name] = { price: price, count: 1 };
+            }
+            localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+            updateTotal();
+        }
+
+        function updateTotal() {
+            const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || {};
+            const repairCost = parseInt(document.getElementById('repairCost').value) || 0;
+            const totalPriceElement = document.getElementById('totalPrice');
+            const selectedItemsElement = document.getElementById('selectedItems');
+            const selectedItemsListElement = document.getElementById('selectedItemsList');
+            let total = 0;
+            selectedItemsElement.innerHTML = '';
+            selectedItemsListElement.innerHTML = '';
+            for (const [name, info] of Object.entries(selectedItems)) {
+                const itemTotal = info.price * info.count;
+                total += itemTotal;
+                const formattedItemTotal = formatNumberWithCommas(itemTotal);
+                const itemElement = document.createElement('p');
+                itemElement.innerHTML = `${name} x${info.count} - $${formattedItemTotal}`;
+                selectedItemsElement.appendChild(itemElement);
+
+                // Add to the selected items list
+                for (let i = 0; i < info.count; i++) {
+                    const listItemElement = document.createElement('span');
+                    listItemElement.textContent = `${name}, `;
+                    //selectedItemsListElement.appendChild(listItemElement);
+                }
+            }
+            total += repairCost;
+            const formattedTotal = formatNumberWithCommas(total);
+            totalPriceElement.textContent = formattedTotal;
+        }
+
+        function resetTotal() {
+            localStorage.removeItem('selectedItems');
+            updateTotal();
+            resetSummary();
+        }
+
+        function showSummary() {
+            const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || {};
+
+            // Check if there are selected items
+            if (Object.keys(selectedItems).length > 0) {
+                const summaryElement = document.getElementById('summary');
+                let upgradesPurchased = "";
+
+                let resprays = "";
+                for (const [name, info] of Object.entries(selectedItems)) {
+                    if (name.includes("Respray")) {
+                        resprays += `${name.charAt(0)}/`
+                    } else {
+                        upgradesPurchased += `${name}, `;
+                    }
+                }
+                //remove last slash
+                if (resprays) {
+                    resprays = resprays.slice(0, -1)
+                    resprays += " Respray"
+                    upgradesPurchased += resprays
+                }else{
+                    upgradesPurchased = upgradesPurchased.slice(0, -2);
+
+                }
+
+
+                const repairCost = parseInt(document.getElementById('repairCost').value) || 0;
+                const total = calculateTotal(selectedItems) + repairCost;
+                const formattedTotal = formatNumberWithCommas(total);
+                const summaryMessage = `<span class="data-label">Customer Name:</span> ${document.getElementById('customerName').value}<br>
+                                        <span class="data-label">Vehicle | Make/Model:</span> ${document.getElementById('vehicleMakeModel').value}<br>
+                                        <span class="data-label">Plate:</span> ${document.getElementById('plate').value}<br>
+                                        <span class="data-label">Upgrades Purchased:</span> ${upgradesPurchased}<br>
+                                        <span class="data-label">Price Charged:</span> $${formattedTotal}<br>
+                                        <span class="data-label">SHOP:</span> Hayes`;
+
+                summaryElement.innerHTML = summaryMessage;
+            } else {
+                alert("No upgrades selected. Please select at least one item before showing the summary.");
+            }
+        }
+
+        function resetSummary() {
+            const summaryElement = document.getElementById('summary');
+            summaryElement.innerHTML = '';
+        }
+
+        function resetInfo() {
+            document.getElementById('customerName').value = '';
+            document.getElementById('vehicleMakeModel').value = '';
+            document.getElementById('plate').value = '';
+        }
+
+        function calculateTotal(selectedItems) {
+            let total = 0;
+            for (const info of Object.values(selectedItems)) {
+                total += info.price * info.count;
+            }
+            return total;
+        }
+
+        function formatNumberWithCommas(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function filterItems(searchTerm) {
+            const items = document.querySelectorAll('#itemList li');
+            items.forEach(item => {
+                const itemName = item.textContent.toLowerCase();
+                if (itemName.includes(searchTerm.toLowerCase())) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
