@@ -72,6 +72,7 @@
             user-select: none;
         }
 
+        #itemListM,
         #itemList,
         #selectedItems,
         #selectedItemsList,
@@ -96,7 +97,24 @@
             /* For Firefox */
         }
 
+        #itemListM {
+            max-height: 30vh;
+            /* 30% of the viewport height */
+            column-width: 300px;
+            /* Minimum width of each column, adjust as needed */
+            column-fill: auto;
+            /* Ensures columns are filled evenly */
+            width: 100%;
+            /* Adjust based on the container's width */
+            -webkit-column-width: 300px;
+            /* For Safari and Chrome */
+            -moz-column-width: 300px;
+            /* For Firefox */
+        }
+
         .item-action,
+        #checkB,
+        #checkM,
         #showSummary,
         #resetInfo,
         #resetTotal {
@@ -151,6 +169,26 @@
             height: auto;
             /* Maintain aspect ratio */
         }
+
+        #checkBtn {
+            display: none;
+        }
+        #itemList {
+            display: none;
+        }
+        #checkBtn:checked ~ #itemList {
+            display: block;
+        }
+
+        #checkBtnM {
+            display: none;
+        }
+        #itemListM {
+            display: none;
+        }
+        #checkBtnM:checked ~ #itemListM {
+            display: block;
+        }
     </style>
 </head>
 
@@ -173,12 +211,21 @@
     <input type="text" id="fto">
     <br>
 
+    <label for="checkBtn" id="checkB">
+        Customer Pricing
+    </label>
+
+    <label for="checkBtnM" id="checkM">
+        Mechanic Pricing
+    </label>
+
     <!-- Search input -->
     <label for="search" class="data-label">Search:</label>
     <input type="text" id="search" oninput="filterItems(this.value)">
     <br>
 
-    <!-- List of car upgrades -->
+    <!-- List of car upgrades -->  
+    <input type="checkbox" id="checkBtn">
     <ul id="itemList">
         <!-- Updated item information with the same visuals -->
         <li onclick="selectItem('Arch Cover', 500)">Arch Cover - $500</li>
@@ -241,6 +288,69 @@
         <li onclick="selectItem('Tire Smoke', 500)">Tire Smoke - $500</li>
     </ul>
 
+    <input type="checkbox" id="checkBtnM">
+    <ul id="itemListM">
+        <!-- Updated item information with the same visuals -->
+        <li onclick="selectItem(' Arch Cover', 400)">Arch Cover - $400</li>
+        <li onclick="selectItem(' Aerial', 400)">Aerial - $400</li>
+        <li onclick="selectItem(' Armor 2', 3250)">Armor 2 - $3250</li>
+        <li onclick="selectItem(' Armor 3', 5500)">Armor 3 - $5500</li>
+        <li onclick="selectItem(' Armor 4', 9450)">Armor 4 - $9450</li>
+        <li onclick="selectItem(' Armor 5', 13250)">Armor 5 - $13250</li>
+        <li onclick="selectItem(' Armor 6', 18500)">Armor 6 - $18500</li>
+        <li onclick="selectItem(' Brakes 2', 3250)">Brakes 2 - $3250</li>
+        <li onclick="selectItem(' Brakes 3', 5500)">Brakes 3 - $5500</li>
+        <li onclick="selectItem(' Brakes 4', 9450)">Brakes 4 - $9450</li>
+        <li onclick="selectItem(' Custom Tires', 600)">Custom Tires - $600</li>
+        <li onclick="selectItem(' Dashboard Color', 1000)">Dashboard - $400</li>
+        <li onclick="selectItem(' Dashboard Color', 1000)">Dashboard Color - $1000</li>
+        <li onclick="selectItem(' Dial', 400)">Dial - $400</li>
+        <li onclick="selectItem(' Engine 2', 3250)">Engine 2 - $3250</li>
+        <li onclick="selectItem(' Engine 3', 5500)">Engine 3 - $5500</li>
+        <li onclick="selectItem(' Engine 4', 9450)">Engine 4 - $9450</li>
+        <li onclick="selectItem(' Engine 5', 13250)">Engine 5 - $13250</li>
+        <li onclick="selectItem(' Engine Block', 400)">Engine Block - $400</li>
+        <li onclick="selectItem(' Exhaust', 400)">Exhaust - $400</li>
+        <li onclick="selectItem(' Fuel Tank', 400)">Fuel Tank - $400</li>
+        <li onclick="selectItem(' Front Bumper', 400)">Front Bumper - $400</li>
+        <li onclick="selectItem(' Grille', 400)">Grille - $400</li>
+        <li onclick="selectItem(' Hood', 400)">Hood - $400</li>
+        <li onclick="selectItem(' Interior Respray', 1000)">Interior Respray - $1000</li>
+        <li onclick="selectItem(' Left Fender', 400)">Left Fender - $400</li>
+        <li onclick="selectItem(' Livery', 400)">Livery - $400</li>
+        <li onclick="selectItem(' Ornaments', 400)">Ornaments - $400</li>
+        <li onclick="selectItem(' Old Livery', 100)">Old Livery - $100</li>
+        <li onclick="selectItem(' P Respray', 1000)">P Respray - $1000</li>
+        <li onclick="selectItem(' Pearlescent', 1000)">Pearlescent - $1000</li>
+        <li onclick="selectItem(' Plate Index', 1000)">Plate Index - $1000</li>
+        <li onclick="selectItem(' Rear Bumper', 400)">Rear Bumper - $400</li>
+        <li onclick="selectItem(' Rim Color', 1000)">Rim Color - $1000</li>
+        <li onclick="selectItem(' Right Fender', 400)">Right Fender - $400</li>
+        <li onclick="selectItem(' Rims', 400)">Rims - $400</li>
+        <li onclick="selectItem(' Roof', 400)">Roof - $400</li>
+        <li onclick="selectItem(' Roll Cage', 400)">Roll Cage - $400</li>
+        <li onclick="selectItem(' Seats', 400)">Seats - $400</li>
+        <li onclick="selectItem(' Side Skirt', 400)">Side Skirt - $400</li>
+        <li onclick="selectItem(' S Respray', 1000)">S Respray - $1000</li>
+        <li onclick="selectItem(' Spoiler', 400)">Spoiler - $400</li>
+        <li onclick="selectItem(' Steering Wheel', 400)">Steering Wheel - $400</li>
+        <li onclick="selectItem(' Strut', 400)">Strut - $400</li>
+        <li onclick="selectItem(' Speaker', 400)">Speaker - $400</li>
+        <li onclick="selectItem(' Suspension 2', 3250)">Suspension 2 - $3250</li>
+        <li onclick="selectItem(' Suspension 3', 5500)">Suspension 3 - $5500</li>
+        <li onclick="selectItem(' Suspension 4', 9450)">Suspension 4 - $9450</li>
+        <li onclick="selectItem(' Suspension 5', 13250)">Suspension 5 - $13250</li>
+        <li onclick="selectItem(' Tint', 400)">Tint - $400</li>
+        <li onclick="selectItem(' Trunk', 400)">Trunk - $400</li>
+        <li onclick="selectItem(' Trim A', 400)">Trim A - $400</li>
+        <li onclick="selectItem(' Trim B', 400)">Trim B - $400</li>
+        <li onclick="selectItem(' Transmission 2', 3250)">Transmission 2 - $3250</li>
+        <li onclick="selectItem(' Transmission 3', 5500)">Transmission 3 - $5500</li>
+        <li onclick="selectItem(' Transmission 4', 9450)">Transmission 4 - $9450</li>
+        <li onclick="selectItem(' Turbo', 10000)">Turbo - $10000</li>
+        <li onclick="selectItem(' Tire Smoke', 400)">Tire Smoke - $400</li>
+    </ul>
+
     <!-- Total price display -->
     <h2>Total: $<span id="totalPrice">0</span></h2>
 
@@ -268,6 +378,15 @@
         document.addEventListener('DOMContentLoaded', (event) => {
             updateTotal();
         });
+
+        function CustomerFunc() {
+            var x = document.getElementById("ListDiv");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
 
         function selectItem(name, price) {
             const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || {};
