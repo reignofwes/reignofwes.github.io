@@ -15,7 +15,6 @@
         h1,
         h2 {
             color: #000000;
-            /* Change heading color to blue */
         }
 
         input[type="text"],
@@ -35,9 +34,7 @@
             cursor: pointer;
             font-weight: bold;
             color: #000000;
-            /* Change text color of buttons to blue */
             background-color: #ffe8f9;
-            /* Change background color of buttons to yellow */
             transition: background 0.3s ease;
         }
 
@@ -54,9 +51,7 @@
 
         li {
             background-color: #ffe8f9;
-            /* Change background color of items to blue */
             color: #000000;
-            /* Change text color of items to yellow */
             padding: 10px;
             margin-bottom: 10px;
             border-radius: 5px;
@@ -84,32 +79,21 @@
 
         #itemList {
             max-height: 30vh;
-            /* 30% of the viewport height */
             column-width: 300px;
-            /* Minimum width of each column, adjust as needed */
             column-fill: auto;
-            /* Ensures columns are filled evenly */
             width: 100%;
-            /* Adjust based on the container's width */
             -webkit-column-width: 300px;
-            /* For Safari and Chrome */
             -moz-column-width: 300px;
-            /* For Firefox */
+
         }
 
         #itemListM {
             max-height: 30vh;
-            /* 30% of the viewport height */
             column-width: 300px;
-            /* Minimum width of each column, adjust as needed */
             column-fill: auto;
-            /* Ensures columns are filled evenly */
             width: 100%;
-            /* Adjust based on the container's width */
             -webkit-column-width: 300px;
-            /* For Safari and Chrome */
             -moz-column-width: 300px;
-            /* For Firefox */
         }
 
         .item-action,
@@ -122,9 +106,7 @@
             margin-left: 10px;
             font-weight: bold;
             color: #000000;
-            /* Change text color of buttons to yellow */
             background-color: #ffe8f9;
-            /* Change background color of buttons to blue */
             border: none;
             border-radius: 5px;
             padding: 10px 20px;
@@ -136,38 +118,30 @@
         #resetInfo:hover,
         #resetTotal:hover {
             background-color: #2575fc;
-            /* Change background color of buttons on hover to a lighter shade */
         }
 
-        /* Additional styles for the selected items */
         #selectedItemsList,
         #summary {
             margin-top: 10px;
             color: #000000;
         }
 
-        /* Change color of data to blue */
         .data-label {
             color: #000000;
             font-weight: bold;
         }
 
-        /* Styling for the logo */
-        /* Styling for the logo container */
         .logo-container {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
             width: 100%;
-            /* Ensure the container spans the full width */
         }
 
         .logo-container img {
             width: 30%;
             min-width: 100px;
-            /* Set a minimum width for the logo */
             height: auto;
-            /* Maintain aspect ratio */
         }
 
         #checkBtn {
@@ -193,7 +167,6 @@
 </head>
 
 <body>
-    <!-- Logo container -->
     <div class="logo-container">
         <img src="https://discord.cloud/i/u6tyxh3mj" alt="Mirror Park Repair">
     </div>
@@ -219,15 +192,12 @@
         Mechanic Pricing
     </label>
 
-    <!-- Search input -->
     <label for="search" class="data-label">Search:</label>
     <input type="text" id="search" oninput="filterItems(this.value)">
     <br>
 
-    <!-- List of car upgrades -->  
     <input type="checkbox" id="checkBtn">
     <ul id="itemList">
-        <!-- Updated item information with the same visuals -->
         <li onclick="selectItem('Arch Cover', 500)">Arch Cover - $500</li>
         <li onclick="selectItem('Aerial', 500)">Aerial - $500</li>
         <li onclick="selectItem('Armor 2', 4250)">Armor 2 - $4250</li>
@@ -290,7 +260,6 @@
 
     <input type="checkbox" id="checkBtnM">
     <ul id="itemListM">
-        <!-- Updated item information with the same visuals -->
         <li onclick="selectItem('Arch Cover ', 400)">Arch Cover - $400</li>
         <li onclick="selectItem('Aerial ', 400)">Aerial - $400</li>
         <li onclick="selectItem('Armor 2 ', 3250)">Armor 2 - $3250</li>
@@ -351,29 +320,23 @@
         <li onclick="selectItem('Tire Smoke ', 400)">Tire Smoke - $400</li>
     </ul>
 
-    <!-- Total price display -->
     <h2>Total: $<span id="totalPrice">0</span></h2>
 
-    <!-- Selected items display -->
     <div id="selectedItems"></div>
     <div id="selectedItemsList"></div>
     <br>
 
-    <!-- Repair Cost input -->
     <div>
         <label for="repairCost" class="data-label">Repair Cost:</label>
         <input type="number" id="repairCost" onchange="updateTotal()">
     </div>
 
-    <!-- Buttons for actions -->
     <button id="showSummary" onclick="showSummary()">Show Summary</button>
     <button id="resetInfo" onclick="resetInfo()">Reset Info</button>
     <button id="resetTotal" onclick="resetTotal()">Reset Total</button>
 
-    <!-- Summary section -->
     <div id="summary"></div>
 
-    <!-- Script section -->
     <script>
 
 
@@ -419,11 +382,9 @@
                 itemElement.innerHTML = `${name} x${info.count} - $${formattedItemTotal}`;
                 selectedItemsElement.appendChild(itemElement);
 
-                // Add to the selected items list
                 for (let i = 0; i < info.count; i++) {
                     const listItemElement = document.createElement('span');
                     listItemElement.textContent = `${name}, `;
-                    //selectedItemsListElement.appendChild(listItemElement);
                 }
             }
             total += repairCost;
@@ -440,7 +401,6 @@
         function showSummary() {
             const selectedItems = JSON.parse(localStorage.getItem('selectedItems')) || {};
 
-            // Check if there are selected items
             if (Object.keys(selectedItems).length > 0) {
                 const summaryElement = document.getElementById('summary');
                 let upgradesPurchased = "";
@@ -453,7 +413,6 @@
                         upgradesPurchased += `${name}, `;
                     }
                 }
-                //remove last slash
                 if (resprays) {
                     resprays = resprays.slice(0, -1)
                     resprays += " Respray"
